@@ -53,9 +53,9 @@ module ActiveRecord
           belongs_to :parent, :class_name => name, :foreign_key => configuration[:foreign_key], :counter_cache => configuration[:counter_cache]
           
 
-          has_many :children, :class_name => name, :foreign_key => configuration[:foreign_key], 
-            :order => configuration[:order], :dependent => :destroy, &b
-
+          #has_many :children, :class_name => name, :foreign_key => configuration[:foreign_key], :order => configuration[:order], :dependent => :destroy, &b
+          has_many :children, :class_name => name, :foreign_key => configuration[:foreign_key], :dependent => :destroy, &b
+          
           after_save                 :assign_dotted_ids
           after_validation           :update_dotted_ids, :on => :update
 
