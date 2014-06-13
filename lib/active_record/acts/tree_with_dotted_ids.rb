@@ -63,11 +63,13 @@ module ActiveRecord
             include ActiveRecord::Acts::TreeWithDottedIds::InstanceMethods
 
             def self.roots
+              configuration ||= { :foreign_key => "parent_id", :order => nil, :counter_cache => nil }
               o = configuration[:order].nil? ? "nil" : %Q{"#{configuration[:order]}"}
               res = where("#{configuration[:foreign_key]} IS NULL").order(o)
             end
 
             def self.root
+              configuration ||= { :foreign_key => "parent_id", :order => nil, :counter_cache => nil }
               o = configuration[:order].nil? ? "nil" : %Q{"#{configuration[:order]}"}
               res = where("#{configuration[:foreign_key]} IS NULL").order(o)
               res.first
